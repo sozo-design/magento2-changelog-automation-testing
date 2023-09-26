@@ -1,4 +1,5 @@
 {
 	"name": "Test repo",
-	"version": "v0.0.1"
+	"version": "v0.0.1",
+	"description": "Test repo to see how the automatic changelog generation can work"
 }
