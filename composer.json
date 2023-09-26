@@ -1,5 +1,15 @@
 {
-  "name": "Test repo",
+  "name": "sozodesign/magento2-changelog-automation-testing",
   "version": "0.1.0",
-  "description": "Test repo to see how the automatic changelog generation can work"
+  "description": "Test repo to see how the automatic changelog generation can work",
+  "require-dev": {
+    "captainhook/captainhook": "^5.16",
+    "captainhook/plugin-composer": "^5.3",
+    "ramsey/conventional-commits": "^1.5"
+  },
+  "config": {
+    "allow-plugins": {
+      "captainhook/plugin-composer": true
+    }
+  }
 }
