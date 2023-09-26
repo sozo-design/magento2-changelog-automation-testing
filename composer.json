@@ -1,6 +1,6 @@
 {
   "name": "sozodesign/magento2-changelog-automation-testing",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Test repo to see how the automatic changelog generation can work",
   "require-dev": {
     "captainhook/captainhook": "^5.16",
