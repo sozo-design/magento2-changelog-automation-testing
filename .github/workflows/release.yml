@@ -1,33 +1,21 @@
-name: Releases
+name: Generate changelog
 on:
+  release:
+    types: [created, edited]
   push:
-    branches:
-      - 'releases/*'
-
-permissions:
-  contents: write
-
+    branches: [release/*]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 jobs:
-  changelog:
+  generate-changelog:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - name: conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v4.1.1
-        with:
-          github-token: ${{ secrets.github_token }}
-          version-file: './composer.json'
-          tag-prefix: 'v'
-          create-summary: true
-
-      - name: create release
-        uses: actions/create-release@v1
-        if: ${{ steps.changelog.outputs.skipped == 'false' }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.github_token }}
-        with:
-          tag_name: ${{ steps.changelog.outputs.tag }}
-          release_name: ${{ steps.changelog.outputs.tag }}
-          body: ${{ steps.changelog.outputs.clean_changelog }}
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: BobAnkh/auto-generate-changelog@master
+      with:
+        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        PATH: 'CHANGELOG.md'
+        COMMIT_MESSAGE: 'docs(changelog): update release notes'
+        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
