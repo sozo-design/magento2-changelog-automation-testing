@@ -23,6 +23,5 @@ jobs:
         PATH: 'CHANGELOG.md'
         COMMIT_MESSAGE: 'docs(changelog): update release notes'
         TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
-        BRANCH: 'development'
-        REGENERATE_COUNT: '5'
+        REGENERATE_COUNT: '-1'
         UNRELEASED_COMMITS: 'true'
