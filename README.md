@@ -2,3 +2,5 @@
 Test repo to see how the changelog automation can work.
 
 This repo uses the conventional commits to create a CHANGELOG.md automatically
+
+Document update
