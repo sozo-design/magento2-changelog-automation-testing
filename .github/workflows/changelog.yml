@@ -1,25 +1,25 @@
-name: Test Releases
+name: Generate changelog
 on:
+  release:
+    types: [created, edited]
   push:
-    branches:
-      - development
-
-permissions:
-  contents: write
-
+    branches: [main]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+# Allow one concurrent deployment
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 jobs:
-  changelog:
+  generate-changelog:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-      - name: conventional Changelog Action
-        id: changelog
-        uses: TriPSs/conventional-changelog-action@v4.1.1
-        with:
-          github-token: ${{ secrets.github_token }}
-          version-file: './composer.json'
-          tag-prefix: 'v'
-          skip-version-file: 'true'
-          skip-commit: 'true'
-          skip-tag: 'true'
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - uses: BobAnkh/auto-generate-changelog@master
+      with:
+        ACCESS_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        PATH: 'CHANGELOG.md'
+        COMMIT_MESSAGE: 'docs(changelog): update release notes'
+        TYPE: 'feat:Feature,fix:Bug Fixes,docs:Documentation,refactor:Refactor,perf:Performance Improvements'
